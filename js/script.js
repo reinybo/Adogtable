@@ -4,7 +4,7 @@
 const $dogSection = $('#dogs-section');
 const $dogSection2 = $('#dogs-section2');
 let dogsObjectsArray;
-
+let dogsBreedsArray=[];
 
 const apiKey = "lIjLEOom";
 
@@ -42,8 +42,8 @@ function handleGetData() {
         console.log("data: ");
         console.log(data);
         dogsDataArray=data.data;
-        dogsIncludesArray=data.included;
         render();
+        sideBarBreeds();
 
     }, ( error ) => {
         console.log( 'bad request', error );
@@ -53,6 +53,8 @@ function handleGetData() {
 
 function render() {
     const availDogs = dogsDataArray.map(function(dogObject, index) {
+
+        dogsBreedsArray.push(dogObject.attributes.breedPrimary);
 
         return `
             <article data-index="${index}">
@@ -64,6 +66,29 @@ function render() {
     })
     $dogSection.html(availDogs);
 }
+
+
+
+function sideBarBreeds() {
+    console.log(dogsBreedsArray);
+    let $breedParent = document.getElementById('dropdown'); 
+
+    for(let i = 0; i < dogsBreedsArray.length; i++) {
+        var breed = dogsBreedsArray[i];
+        var el = document.createElement('option');
+        el.text = breed;
+        console.log(el.text);
+        el.value = breed;
+        console.log(el.value);
+        $breedParent.appendChild(el);
+    }
+}
+
+
+
+
+
+
 
 
 
