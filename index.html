@@ -6,24 +6,63 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script defer src="./js/script.js"></script>
+    <link rel="stylesheet" href="styles.css">
     <title>Adogtable</title>
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Shadow&family=Pacifico&family=Poiret+One&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Learn about adoptable dogs near you!</h1>
-    <main>
-        <section id="dogs-section"></section>
-        <section id="dogs-section2">2</section>
 
-        <div></div>
+    <div class="sidenav">
+        <select name="bad_day">
+            <option value="Sunday">Sunday</option>
+            <option value="Monday" selected>Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+        </select>
+
+
+
+        <a class=side href="#">About</a>
+        <a class=side href="#">Services</a>
+        <a class=side href="#">Clients</a>
+        <a class=side href="#">Contact</a>
+    </div>
+    
+    <header>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href='#dog-news'>Dog News</a></li>
+            <li><a href='faq'>FAQs</a></li>
+            <li class="login"><a href='login'>Log-in</a></li>
+        </ul>
+    </header>
+
+    
+    <h1>Learn about adoptable dogs near you!</h1>
+
+    <main>
+
+        <form onsubmit="return false;">
+            <label>Zip Code: 
+                <input id=zip type="text" placeholder="zip code"/>
+                <input id=radius type="text" placeholder="radius(miles)"/>
+                <input type="submit" value="See dogs!" />
+            </label>
+        </form>
+
+        
+            <section id="dogs-section"></section>
+            <!-- <section id="dogs-section2"></section>
+
+            <div></div> -->
+        
+
+        <footer>Call (657)265-6469 or email Dogs@Adogtable.com</footer>
     </main>
 
 
-
-        <!-- <form>
-            <label>Zip Code: 
-                <input type="text" placeholder="zip code"/>
-                <input type="submit" value="See dogs!" />
-            </label>
-        </form> -->
 </body>
 </html>

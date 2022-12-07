@@ -1,0 +1,97 @@
+* {
+    box-sizing: border-box;
+  }
+
+body {
+    background-color: white;
+    margin: 0;
+    font-family: 'Poiret One', cursive;
+    text-align: center;
+}
+
+
+header {
+    background-color: cornflowerblue;
+    margin:0;
+}
+
+ul {
+    list-style-type: none; 
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+    padding: 16px;
+    display: block;
+}
+
+li a:hover {
+    background-color: cornflowerblue;
+}
+
+.login {
+    float: right;
+}
+
+h1 {
+    background-color: rgb(198, 235, 254);
+    padding: 25px ;
+    margin: 0;
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+    border-width: 15px;
+    border-color: CornflowerBlue;
+}
+
+article {
+    flex-basis: 32.2%;
+    justify-content: space-around;
+    border: solid;
+    border-width: 1px;
+    border-color: CornflowerBlue;
+    margin: 5px;
+}
+
+
+footer {
+    background-color: CornflowerBlue;
+    padding: 15px;
+    justify-content: space-evenly;
+    text-align: left;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+.sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 160px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    /* z-index: 1; Stay on top */
+    top: 0; /* Stay at the top*/
+    left: 0;
+    background-color: white; /* Black */
+    border: solid;
+    border-width: .5px;
+    border-color: rgb(19, 0, 55);
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+    position: absolute;
+    display: block;
+    top: 138px;
+  }
+
+  .side {
+    display: block;
+  }
+
+  main {
+    margin-left: 160px;
+  }
