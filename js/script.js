@@ -26,6 +26,8 @@ const $radiusInputSpace = $('#radius');
 
 const $dropdown = $('#filterResults');
 
+var $paw = document.getElementById('paw');
+
 //////////////
 ///EVENT LISTENERS
 //////////////
@@ -69,6 +71,7 @@ function handleGetData() {
         console.log(data);
         dogsDataArray=data.data;
         render();
+        $paw.classList.add("fa-shake");
         sideBarBreeds();
 
     }, ( error ) => {

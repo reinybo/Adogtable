@@ -95,3 +95,7 @@ footer {
     width: 150px;
     margin: 5px;
   }
+
+  #paw {
+    --fa-animation-iteration-count: 1;
+  }
