@@ -90,7 +90,7 @@ function render(index) {
                 <h5>${dogObject.attributes.distance} miles</h5>
                 <img id='dogImg' src="${dogObject.attributes.pictureThumbnailUrl}"/>
                 <br></br>
-                <button onclick="learnMore(${index})">Learn more</button>
+                <button id='learnMore' onclick="learnMore(${index})">Learn more</button>
             </article>
         `; 
     });

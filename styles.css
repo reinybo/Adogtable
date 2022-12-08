@@ -47,6 +47,7 @@ section {
     flex-wrap: wrap;
     border-width: 15px;
     border-color: CornflowerBlue;
+    margin-bottom: 50px;
 }
 
 article {
@@ -88,4 +89,9 @@ footer {
 
   main {
     margin-left: 160px;
+  }
+
+  select {
+    width: 150px;
+    margin: 5px;
   }
