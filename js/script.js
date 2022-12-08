@@ -24,7 +24,7 @@ $dropdown.on('submit', handleFilter);
 
 $form.on('submit', handleGetData);
 
-$dogSection.on('click', handleClick);
+// $dogSection.on('click', handleClick);
 
 
 function handleGetData() {
@@ -69,37 +69,39 @@ function handleGetData() {
 }
 
 
-function render() {
-    const availDogs = dogsDataArray.map(function(dogObject, index) {
+function render(index) {
+    const availDogs = dogsDataArray?.map(function(dogObject, index) {
 
         if (!dogsBreedsArray.includes(dogObject.attributes.breedPrimary)){
             dogsBreedsArray.push(dogObject.attributes.breedPrimary);
         }
         
         return `
-            <article data-index="${index}">
+            <article class="dog" id="${index}">
                 <h2>${dogObject.attributes.name}</h2> 
                 <h5>${dogObject.attributes.distance} miles</h5>
                 <img id='dogImg' src="${dogObject.attributes.pictureThumbnailUrl}"/>
+                <br></br>
+                <button onclick="learnMore(${index})">Learn more</button>
             </article>
         `;
-    })
+    });
     $dogSection.html(availDogs);
 }
 
 
 
 function sideBarBreeds() {
-    console.log(dogsBreedsArray);
+    // console.log(dogsBreedsArray);
     let $breedParent = document.getElementById('breedDropdown'); 
 
     for(let i = 0; i < dogsBreedsArray.length; i++) {
         let breed = dogsBreedsArray[i];
         let el = document.createElement('option');
         el.text = breed;
-        console.log(el.text);
+        // console.log(el.text);
         el.value = breed;
-        console.log(el.value);
+        // console.log(el.value);
         $breedParent.appendChild(el);
     }
 }
@@ -109,45 +111,67 @@ function sideBarBreeds() {
 function handleFilter() {
     console.log('pressed');
     const breedFilter = document.querySelector('#breedDropdown');
-    const breedChoice = `'${breedFilter.value}'`;
+    breedChoice = breedFilter.value;
+
     operationVal = 'equal';
-    console.log(breedChoice);
 
     const sexFilter = document.querySelector('#sexDropdown');
-    const sexChoice = `'${sexFilter.value}'`;
-
-
-
+    sexChoice = sexFilter.value;
 
     handleGetData();
 }
 
 
 
+function learnMore(doggyIndex) {
+    console.log(dogsDataArray[doggyIndex].attributes.breedPrimary);
+    selectedArticle = document.getElementById(doggyIndex);
+    console.log(selectedArticle);
+    selectedArticle.style.border='none';
+    selectedArticle.innerHTML = `
+        <article class="dog" id="${doggyIndex}">
+            <h5>${dogsDataArray[doggyIndex].attributes.name}</h2> 
+            <h5>${dogsDataArray[doggyIndex].attributes.distance} miles</h5>
+            <h5>sex: ${dogsDataArray[doggyIndex].attributes.sex}</h6>
+            <h5>breed: ${dogsDataArray[doggyIndex].attributes.breedPrimary}</h6>
+            <a href="${dogsDataArray[doggyIndex].attributes.url}">LINK</a>
+            <br></br>
+            <img id='dogImg' src="${dogsDataArray[doggyIndex].attributes.pictureThumbnailUrl}"/>
+            <br></br>
+            <button onclick="render(${doggyIndex})">Show less</button>
+        </article>
+        `;
 
-
-function handleClick() {
-    const $target = $(this);
-    const $dogClicked = $target.closest('article');
-    const answer = $dogClicked.text();
-    // console.log(answer);
-    console.log($dogClicked);
-    const dogIndex = $dogClicked.val();
-    console.log('index:');
-    console.log(dogIndex);
-    
-    // const dogIndex = $dogClicked.attr('data-index');
-    // console.log($dogClicked.attr(data-index));
-
-
-    // const questionReference = questionObjectsArray[questionIndex];
-    
-    // if (questionReference.correct_answer === answer) {
-    //     $answerResult.text('You Guessed Correctly');
-    // } else {
-    //     $answerResult.text('You Guessed Incorrectly');
-    // }
 }
+
+
+
+
+// function handleClick() {
+//     const $target = $(this);
+//     const $dogClicked = $target.closest('article.dog');
+//     // const answer = $dogClicked.text();
+//     // console.log(answer);
+//     console.log($dogClicked);
+//     const dogIndex = $dogClicked.attr('class');
+//     console.log('index:');
+//     console.log(dogIndex);
+
+//     console.log(dogsDataArray.indexOf($dogClicked));
+
+    
+//     // const dogIndex = $dogClicked.attr('data-index');
+//     // console.log($dogClicked.attr(data-index));
+
+
+//     // const questionReference = questionObjectsArray[questionIndex];
+    
+//     // if (questionReference.correct_answer === answer) {
+//     //     $answerResult.text('You Guessed Correctly');
+//     // } else {
+//     //     $answerResult.text('You Guessed Incorrectly');
+//     // }
+// }
 
 
 
