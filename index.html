@@ -13,20 +13,18 @@
 <body>
 
     <div class="sidenav">
-        <select id=dropdown name="bad_day">
-            <option value="Sunday">Sunday</option>
-            <option value="Monday" selected>Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-        </select>
-
-        <a class=side href="#">About</a>
-        <a class=side href="#">Services</a>
-        <a class=side href="#">Clients</a>
-        <a class=side href="#">Contact</a>
+        <form onsubmit="return false;" id="filterResults">
+            <select id='breedDropdown' name="breed">
+                <option>Select a breed</option>
+            </select>
+            <select id='sexDropdown' name='sex'>
+                <option>Select a sex</option>
+                <option>female</option>
+                <option>male</option>
+            </select>
+            <br>
+            <input id='breedSubmit' type="submit" value="Filter Results" />        
+        </form>
     </div>
     
     <header>
@@ -43,9 +41,10 @@
 
     <main>
 
-        <form onsubmit="return false;">
+        <form onsubmit="return false;" id="seeDogs">
             <label>Zip Code: 
                 <input id=zip type="text" placeholder="zip code"/>
+                Radius:
                 <input id=radius type="text" placeholder="radius(miles)"/>
                 <input type="submit" value="See dogs!" />
             </label>

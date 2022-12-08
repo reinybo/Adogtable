@@ -6,18 +6,23 @@ const $dogSection2 = $('#dogs-section2');
 let dogsObjectsArray;
 let dogsBreedsArray=[];
 
+let operationVal = 'notblank';
+let breedChoice = 'chihuahua';
+let sexChoice='male';
+
 const apiKey = "lIjLEOom";
 
 const URL = "https://api.rescuegroups.org/v5";
 
-const $form = $('form');
+const $form = $('#seeDogs');
 const $zipInputSpace = $('#zip');
 const $radiusInputSpace = $('#radius');
 
+const $dropdown = $('#filterResults');
 
+$dropdown.on('submit', handleFilter);
 
-
-$form.on('submit', handleGetData)
+$form.on('submit', handleGetData);
 
 $dogSection.on('click', handleClick);
 
@@ -27,10 +32,23 @@ function handleGetData() {
     const radiusInput = $radiusInputSpace.val(); 
 
     $.ajax({type: 'POST', 
-            url: URL + "/public/animals/search/available/dogs", 
+            url: URL + "/public/animals/search/available/dogs/", 
             headers: {Authorization: apiKey}, 
             data: JSON.stringify({
                      data: {
+                        'filters':
+                        [
+                        {
+                            'fieldName': 'animals.breedPrimary',
+                            'operation': operationVal,
+                            'criteria': breedChoice
+                        },
+                        {
+                            'fieldName': 'animals.sex',
+                            'operation': operationVal,
+                            'criteria': sexChoice
+                        }
+                        ],
                          "filterRadius": {
                              "miles": radiusInput,
                              "postalcode": zipcodeInput,
@@ -54,8 +72,10 @@ function handleGetData() {
 function render() {
     const availDogs = dogsDataArray.map(function(dogObject, index) {
 
-        dogsBreedsArray.push(dogObject.attributes.breedPrimary);
-
+        if (!dogsBreedsArray.includes(dogObject.attributes.breedPrimary)){
+            dogsBreedsArray.push(dogObject.attributes.breedPrimary);
+        }
+        
         return `
             <article data-index="${index}">
                 <h2>${dogObject.attributes.name}</h2> 
@@ -71,11 +91,11 @@ function render() {
 
 function sideBarBreeds() {
     console.log(dogsBreedsArray);
-    let $breedParent = document.getElementById('dropdown'); 
+    let $breedParent = document.getElementById('breedDropdown'); 
 
     for(let i = 0; i < dogsBreedsArray.length; i++) {
-        var breed = dogsBreedsArray[i];
-        var el = document.createElement('option');
+        let breed = dogsBreedsArray[i];
+        let el = document.createElement('option');
         el.text = breed;
         console.log(el.text);
         el.value = breed;
@@ -86,7 +106,21 @@ function sideBarBreeds() {
 
 
 
+function handleFilter() {
+    console.log('pressed');
+    const breedFilter = document.querySelector('#breedDropdown');
+    const breedChoice = `'${breedFilter.value}'`;
+    operationVal = 'equal';
+    console.log(breedChoice);
 
+    const sexFilter = document.querySelector('#sexDropdown');
+    const sexChoice = `'${sexFilter.value}'`;
+
+
+
+
+    handleGetData();
+}
 
 
 
@@ -94,12 +128,18 @@ function sideBarBreeds() {
 
 function handleClick() {
     const $target = $(this);
-    // const answer = $target.text();
     const $dogClicked = $target.closest('article');
+    const answer = $dogClicked.text();
+    // console.log(answer);
     console.log($dogClicked);
+    const dogIndex = $dogClicked.val();
+    console.log('index:');
+    console.log(dogIndex);
     
     // const dogIndex = $dogClicked.attr('data-index');
     // console.log($dogClicked.attr(data-index));
+
+
     // const questionReference = questionObjectsArray[questionIndex];
     
     // if (questionReference.correct_answer === answer) {
