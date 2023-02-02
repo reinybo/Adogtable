@@ -131,6 +131,7 @@ function handleFilter() {   //when filter button is pressed, selections are plac
 function learnMore(doggyIndex) {        //when 'Learn More' button is pressed, display more attributes
     selectedArticle = document.getElementById(doggyIndex);
     selectedArticle.style.border='none';
+    if(typeof(dogsDataArray[doggyIndex].attributes.url) !== 'undefined') {
     selectedArticle.innerHTML = `
         <article class="dog" id="${doggyIndex}">
             <h5>${dogsDataArray[doggyIndex].attributes.name}</h2> 
@@ -144,6 +145,21 @@ function learnMore(doggyIndex) {        //when 'Learn More' button is pressed, d
             <button onclick="render(${doggyIndex})">Show less</button>
         </article>
         `;
+    }
+    else {
+        selectedArticle.innerHTML = `
+        <article class="dog" id="${doggyIndex}">
+            <h5>${dogsDataArray[doggyIndex].attributes.name}</h2> 
+            <h5>${dogsDataArray[doggyIndex].attributes.distance} miles</h5>
+            <h5>sex: ${dogsDataArray[doggyIndex].attributes.sex}</h6>
+            <h5>breed: ${dogsDataArray[doggyIndex].attributes.breedPrimary}</h6>
+            <br></br>
+            <img id='dogImg' src="${dogsDataArray[doggyIndex].attributes.pictureThumbnailUrl}"/>
+            <br></br>
+            <button onclick="render(${doggyIndex})">Show less</button>
+        </article>
+        `;
+    }
 }
 
 
